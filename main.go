@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/static"
         "github.com/gin-gonic/gin"
 	"gopkg.in/olahol/melody.v1"
 	"net/http"
@@ -9,6 +10,8 @@ import (
 func main() {
 	r := gin.Default()
 	m := melody.New()
+
+	r.Use(static.Serve("/public", static.LocalFile("./public", true)))
 
 	r.GET("/", func(c *gin.Context) {
 		http.ServeFile(c.Writer, c.Request, "index.html")
