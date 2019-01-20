@@ -14,7 +14,7 @@ func main() {
 
 	r.Use(static.Serve("/public", static.LocalFile("./public", true)))
 
-	r.GET("rid", func(c *gin.Context) {
+	r.GET("/rint", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"rid": rand.Int(),
 		})
