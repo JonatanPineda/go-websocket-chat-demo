@@ -5,6 +5,7 @@ import (
         "github.com/gin-gonic/gin"
 	"gopkg.in/olahol/melody.v1"
 	"net/http"
+	"math/rand"
 )
 
 func main() {
@@ -12,6 +13,13 @@ func main() {
 	m := melody.New()
 
 	r.Use(static.Serve("/public", static.LocalFile("./public", true)))
+
+	r.GET("rid", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"rid": rand.Int(),
+		})
+	})
+
 
 	r.GET("/", func(c *gin.Context) {
 		http.ServeFile(c.Writer, c.Request, "index.html")
